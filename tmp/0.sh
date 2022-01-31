@@ -33,3 +33,7 @@ seq 5 | awk '$1%2==0{print $1,"偶数"}'
 seq 5 | awk '$1%2==0{print $1,"偶数"}$1%2{print $1,"奇数"}'
 # 5
 seq 5 | awk 'BEGIN{a=0}$1%2==0{print $1,"偶数"}$1%2{print $1, "奇数"}{a+=$1}END{print "合計",a}'
+
+# 1.3.e sorとuniq
+seq 5 | awk '{print $1%2 ? "奇数": "偶数"}' | sort | uniq -c
+seq 5 | awk '{print $1%2 ? "奇数": "偶数"}' | sort | uniq -c | awk '{print $2,$1}' | sort -k2,2n
