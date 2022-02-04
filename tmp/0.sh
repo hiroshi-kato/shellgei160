@@ -37,3 +37,12 @@ seq 5 | awk 'BEGIN{a=0}$1%2==0{print $1,"偶数"}$1%2{print $1, "奇数"}{a+=$1}
 # 1.3.e sorとuniq
 seq 5 | awk '{print $1%2 ? "奇数": "偶数"}' | sort | uniq -c
 seq 5 | awk '{print $1%2 ? "奇数": "偶数"}' | sort | uniq -c | awk '{print $2,$1}' | sort -k2,2n
+
+# 1.3.f xargsによる一括処理
+seq 4 | xargs mkdir
+seq 4 | xargs rmdir
+mkdir 1 3
+# 入力された文字列を指定した工数ずつコマンドに渡す
+# mv 1 2, mv 3 4, が実行される
+seq 4 | xargs -n2 mv
+seq 4 | xargs -I@ mkdir dir_@
